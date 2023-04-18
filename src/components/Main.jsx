@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Card from './Card';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -8,10 +8,10 @@ import plus from '../images/plus.svg';
 import avatarImage from '../images/image.jpg';
 function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
      
-    const [userName, setUserName] = useState('Жак-Ив Кусто')
-    const [userDescription, setUserDescription] = useState('Исследователь океана')
-    const [userAvatar, setUserAvatar] = useState( avatarImage )
-    const [cards, setCards] = useState([])
+    const [ userName, setUserName ] = useState('Жак-Ив Кусто')
+    const [ userDescription, setUserDescription ] = useState('Исследователь океана')
+    const [ userAvatar, setUserAvatar ] = useState(avatarImage)
+    const [ cards, setCards ] = useState([])
 
     useEffect(()=> {
         api.getCurrentUser()
@@ -24,7 +24,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         .catch( err => console.log(err))
       }, [])
 
-      useEffect(()=>{
+      useEffect(()=> {
         api.getCards()
         .then(res => setCards(res))
         .catch(err => console.log(err))
@@ -35,7 +35,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
          <section className="profile">
             <img
              className="profile__image"
-             src={ userAvatar }
+             src={userAvatar}
               alt="Аватар пользователя"/>
             <button
              className="profile__button-avatar"
