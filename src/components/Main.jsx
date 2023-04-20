@@ -16,7 +16,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     useEffect(()=> {
         api.getCurrentUser()
         .then(res => {
-          console.log(res);
+        
           setUserName(res.name)
           setUserDescription(res.about)
           setUserAvatar(res.avatar)
