@@ -12,6 +12,7 @@ function App() {
   const [ isEditProfilePopupOpen, setIsEditProfilePopupOpen ] = useState(false)
   const [ isAddPlacePopupOpen, setIsAddPlacePopupOpen ] = useState(false)
   const [ selectedCard, setSelectedCard ] = useState({name: "", link: ""} )
+  
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true)
@@ -23,14 +24,11 @@ function App() {
     setIsAddPlacePopupOpen(true)
   }
 
-  function handleCardClick(e) {
-    if (e.target.classList.contains("element__image")) {
-      setSelectedCard({ name: e.target.alt, link: e.target.src })
-      console.log(e.target)
-      console.dir(e.target)
-    }
-  }
-
+  function handleCardClick(card) {
+      
+        setSelectedCard(card)}
+    
+  
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)

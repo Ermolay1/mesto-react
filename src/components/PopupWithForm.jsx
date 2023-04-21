@@ -7,7 +7,7 @@ function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
    return (
     <section className={popupClass} onClick={onClose}>
        
-    <div className="popup__container" onClick={(e => e.stopPropagation())}>
+    <div className="popup__container" onClick={(e => e.target === e.currentTarget)}>
     <button type="button" className="popup__close popup__button-close" 
      aria-label="закрыть"
      onClick={onClose}></button>

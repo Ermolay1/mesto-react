@@ -4,12 +4,12 @@ function ImagePopup({ onClose, card }) {
 
     return (
         <section className={`popup popup_type_image ${card.link && "popup_opened"}`}>
-         <figure className="popup__figure">
-            <button type="button"
-             className="popup__close popup__button-close" 
+         <button type="button"
+             className="popup__close popup__button-close popup__button-closeImage" 
              aria-label="закрыть"
              onClick={onClose}
-             ></button>
+             />
+         <figure className="popup__figure">
             <img className="popup__image " 
               src={card.link}
               alt={card.name}

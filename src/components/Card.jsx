@@ -2,10 +2,12 @@ import React from "react"
 
 
 function Card({ card, onCardClick }) {
-
+    function handleClick() {
+        onCardClick(card);
+      }
     return (
         <li className="element">
-            <img className="element__image "  src={card.link} alt={card.name} onClick={onCardClick}/>
+            <img className="element__image "  src={card.link} alt={card.name} onClick={handleClick}/>
             <div className="element__column">
                  <h2 className="element__text">{card.name}</h2>
                  <div>

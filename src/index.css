@@ -47,4 +47,5 @@
 @import url(./blocks/popup/__close-avatar/popup__close-avatar.css);
 @import url(./blocks/popup/__button-save/_inactive/popup__button-save_inactive.css);
 @import url(./blocks/popup/__close-delete/popup__close-delete.css);
+@import url(./blocks/popup/__button-closeImage/popup__button-closeImage.css);
 @import url(./blocks/profile/__addbutton-image/profile__addbutton-image.css);
