@@ -70,7 +70,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                 return (
                         <Card key={card._id}
                             card={card}
-                            onCardclick={onCardClick}
+                            onCardClick={onCardClick}
                              />
                     )}
                     )}
