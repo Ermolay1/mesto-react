@@ -3,11 +3,17 @@ import Form from "./Form";
 
 function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
     const popupClass = `popup  popup_type_${name} ${isOpen ? 'popup_opened' : ''}`;
-
+    const handleCloseByOverlay = (e) => {
+      if (e.target === e.currentTarget) {
+         onClose()
+      }
+   
+   }
+   
    return (
-    <section className={popupClass} onClick={onClose}>
+    <section className={popupClass} onClick={onClose && handleCloseByOverlay} >
        
-    <div className="popup__container" onClick={(e => e.target === e.currentTarget)}>
+    <div className="popup__container">
     <button type="button" className="popup__close popup__button-close" 
      aria-label="закрыть"
      onClick={onClose}></button>
