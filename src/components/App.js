@@ -70,17 +70,21 @@ function App() {
   const [isLoadingUpdateUser, setIsLoadingUpdateUser] = useState(false)
   const [isLoadingUpdateAvatar, setIsLoadingUpdateAvatar] = useState(false)
 
-  function handleDeleteCard(cardId) {
-    
-      api.deleteCard(cardId)
+  function handleDeleteCard() {
+    setIsLoadingDeleteCard(true)
+      api.deleteCard(selectedCard.id)
           .then(() => {
-              setCards((cards) => cards.filter(card => card._id !== cardId))
-              
+              setCards(cards => cards.filter(c  => c._id !== selectedCard._id))
+              closeAllPopups()
           })
           .catch((err) =>
-              console.log(`Ошибка: ${err}`)
+              console.log(err))
+          .finally(() => {
+                setIsLoadingDeleteCard(false)
+              })
           
-          )
+          
+          
   }
 
   function handleCardLike(card) {
@@ -172,14 +176,15 @@ function App() {
                 <DeleteCardPopup
                         isOpen={isDeletePopupOpen}
                         onClose={setIsDeletePopupOpen}
-                        onDeleteCard={handleDeleteCard}
-                        isLoading={isLoadingDeleteCard}>
+                        isLoading={isLoadingDeleteCard}
+                        onDeleteCard={handleDeleteCard}>
                     </DeleteCardPopup>
 
                 <ImagePopup
+                        isOpen={isImagePopupOpen}
                         card={selectedCard}
                         onClose={setIsImagePopupOpen}
-                        isOpen={isImagePopupOpen}
+                       
                         />
                 </div>
                 </CurrentUserContext.Provider>
