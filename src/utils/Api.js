@@ -108,11 +108,12 @@
       });
   }
 
-  deleteCard(id) {
-      return this._request(`${this._basePath}/cards/${id}`, {
-          method: 'DELETE',
-          headers: this._getHeaders()
-      });
+  deleteCard(_id) {
+      return fetch(`${this._url}/cards/${_id}`, {
+        method: 'DELETE',
+        headers: this._headers
+      })
+      .then(this._checkResponse)
   }
 
   getUserInfo() {

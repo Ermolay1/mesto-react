@@ -2,16 +2,16 @@ import React from "react"
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete } ){
-    const currentUser = React.useContext(CurrentUserContext)
+    const currentUserContext = React.useContext(CurrentUserContext)
   
     
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner._id === currentUserContext._id;
 
     const cardDeleteButtonClassName = `element__delete-element ${
       isOwn ? 'element__delete-element-active' : ''
     }`;
   
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUserContext._id);
   
     
     const cardLikeButtonClassName = `element__like ${
@@ -27,7 +27,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete } ){
     }
   
     function handleDeleteClick() {
-      onCardDelete(card);
+      onCardDelete(card._id);
     }
     return (
         <li className="element">
@@ -48,10 +48,11 @@ function Card({ card, onCardClick, onCardLike, onCardDelete } ){
                         {card.likes.length}</span>
                   </div>
                </div>
-            <button type="button"
+           <button type="button"
              className={cardDeleteButtonClassName}
               aria-label='Кнопка для Удаления'
               onClick={handleDeleteClick} />
+            
         </li>
     )
 }

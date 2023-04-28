@@ -70,18 +70,17 @@ function App() {
   const [isLoadingUpdateUser, setIsLoadingUpdateUser] = useState(false)
   const [isLoadingUpdateAvatar, setIsLoadingUpdateAvatar] = useState(false)
 
-  function handleDeleteCard() {
-      setIsLoadingDeleteCard(true)
-      api.deleteCard(selectedCard._id)
+  function handleDeleteCard(cardId) {
+    
+      api.deleteCard(cardId)
           .then(() => {
-              setCards(cards => cards.filter(c => c._id !== selectedCard._id))
-              closeAllPopups()
+              setCards((cards) => cards.filter(card => card._id !== cardId))
+              
           })
           .catch((err) =>
-              console.log(err))
-          .finally(() => {
-              setIsLoadingDeleteCard(false)
-          })
+              console.log(`Ошибка: ${err}`)
+          
+          )
   }
 
   function handleCardLike(card) {
