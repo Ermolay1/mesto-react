@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form from "./Form"; 
 
-function PopupWithForm({ title, name, children, isOpen, onClose, buttonText }) {
-    const popupClass = `popup  popup_type_${name} ${isOpen ? 'popup_opened' : ''}`;
-    const handleCloseByOverlay = (e) => {
-      if (e.target === e.currentTarget) {
-         onClose()
-      }
-   
-   }
-   
+function PopupWithForm({ name, isOpen, onClose, onSubmit, title, children, buttonText, isFormValid }) {
+
+   useEffect(() => {
+       function handleEscClose(evt) {
+           if (evt.key === 'Escape') onClose()
+       }
+
+       if (isOpen) {
+           document.addEventListener('keydown', handleEscClose)
+           return () => document.removeEventListener('keydown', handleEscClose)
+       }
+   }, [ isOpen ])
+
+   const popupClass = `popup  popup_type_${name} ${isOpen ? 'popup_opened' : ''}`;
    return (
-    <section className={popupClass} onClick={onClose && handleCloseByOverlay} >
+    <section className={popupClass} onClick={onClose} >
        
-    <div className="popup__container">
-    <button type="button" className="popup__close popup__button-close" 
+    <div className="popup__container"  onClick={(e => e.stopPropagation())}>
+    <button type="button"
+     className="popup__close popup__button-close" 
      aria-label="закрыть"
      onClick={onClose}></button>
      <h3 className="popup__title">{title}</h3> 
        <Form
+       onSubmit={onSubmit}
        title={title}
        name={name}
        children={children}
-       buttonText={buttonText}>
+       buttonText={buttonText}
+       isFormValid={isFormValid}>
        </Form>
       
     </div>

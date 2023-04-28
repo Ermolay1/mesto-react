@@ -1,21 +1,23 @@
 import React from "react";
 
-function SubmitButton(props) {
+function SubmitButton({ isFormValid, buttonText }) {
 
+   const buttonClassName = `popup__button popup__button-save  ${isFormValid ? 'popup__button-save_inactive' : ''}`
     return (
-        <button className="popup__button popup__button-save" type="submit">{props.buttonText}</button>
+        <button className={buttonClassName} type="submit" disabled={isFormValid}>{buttonText}</button>
     )
 };
 
-function Form(props) {
+function Form({ name, buttonText, isFormValid, children, onSubmit }) {
 
     return (
         
-            <form className="popup__form " name={props.name}>
+            <form className="popup__form " name={name} onSubmit={onSubmit}>
                 
-            {props.children}
+            {children}
             <SubmitButton
-                buttonText={props.buttonText}>
+                buttonText={buttonText}
+                isFormValid={isFormValid}>
             </SubmitButton>
         </form>
          

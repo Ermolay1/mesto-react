@@ -1,41 +1,30 @@
 import React from 'react';
 import Card from './Card';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import api from '../utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import pencil from '../images/pencil.svg';
 import plus from '../images/plus.svg';
-import avatarImage from '../images/image.jpg';
-function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-     
-    const [ userName, setUserName ] = useState('Жак-Ив Кусто')
-    const [ userDescription, setUserDescription ] = useState('Исследователь океана')
-    const [ userAvatar, setUserAvatar ] = useState(avatarImage)
-    const [ cards, setCards ] = useState([])
+import {useContext} from 'react';
 
-    useEffect(()=> {
-        api.getCurrentUser()
-        .then(res => {
-        
-          setUserName(res.name)
-          setUserDescription(res.about)
-          setUserAvatar(res.avatar)
-        })
-        .catch( err => console.log(err))
-      }, [])
+function Main({ onEditAvatar, onEditProfile, onNewCard, cards, onCardClick, onCardDelete, onCardLike }) {
 
-      useEffect(()=> {
-        api.getCards()
-        .then(res => setCards(res))
-        .catch(err => console.log(err))
-      },[])
+  const currentUser = useContext(CurrentUserContext);
+
+  const cardsElements = cards.map((card) => (
+      <li key={card._id}>
+          <Card
+              card={card}
+              onCardClick={onCardClick}
+              deleteCardClick={onCardDelete}
+              onCardLike={onCardLike} />
+      </li>
+  )) 
 
     return(
        <main className="content">
          <section className="profile">
             <img
              className="profile__image"
-             src={userAvatar}
+             src={currentUser.avatar}
               alt="Аватар пользователя"/>
             <button
              className="profile__button-avatar"
@@ -43,7 +32,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             
             <div className="profile__info">
                 <div className="profile__container">
-                   <h1 className="profile__title">{userName}</h1>
+                   <h1 className="profile__title">{currentUser.name}</h1>
                    <button type="button"
                     className="profile__edit-button profile__edit"
                      aria-label="изменить"
@@ -53,11 +42,11 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
                        alt="карандаш"/>
                    </button>   
                  </div>
-                    <h2 className="profile__subtitle">{userDescription}</h2>
+                    <h2 className="profile__subtitle">{currentUser.about}</h2>
             </div>
             <button className="profile__addbutton" 
               aria-label="добавить"
-              onClick={onAddPlace}
+              onClick={onNewCard}
                     > 
                <img className="profile__addbutton-image"
                 src={plus}
@@ -66,14 +55,7 @@ function Main ({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
          </section>
          <section >
               <ul className="elements">
-              {cards.map(card => {
-                return (
-                        <Card key={card._id}
-                            card={card}
-                            onCardClick={onCardClick}
-                             />
-                    )}
-                    )}
+                 {cardsElements}
               </ul>
           </section>
         </main> 
