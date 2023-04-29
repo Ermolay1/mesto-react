@@ -1,31 +1,30 @@
-import React from 'react'
-import PopupWithForm from './PopupWithForm';
+import React from "react";
+import PopupWithForm from "./PopupWithForm";
+function DeleteCardPopup({ isOpen, handleDeleteCard, onSubmit, isLoading, onClose, onDeleteCard, card, submitTitle }) {
 
-function DeleteCardPopup({ isOpen, isLoading, onClose, onDeleteCard }) {
+   const popupClass = `popup popup_type_delete-card ${
+    isOpen ? "popup_opened" : ""
+  }`;
 
-    const popupClass = `popup popup_type_delete-card ${isOpen ? 'popup_opened' : ''}`;
-     
-    
+ function handleDeleteCard(evt) {
+    evt.preventDefault();
+   onSubmit(card);
+   
+ }
+  return (
+    <PopupWithForm
+      popup={popupClass}
+      name="deleteForm"
+      title="Вы уверены?"
+      submitTitle={submitTitle}
+      onClose={onClose}
+      isOpen={isOpen}
+      onSubmit={handleDeleteCard}
+      buttonText={isLoading ? "Удаление" : "Да"}
 
-    return (
-      <section class={popupClass}  onClick={() => onClose(false)}>
-      <div class="popup__container">
-         <h3 class="popup__title popup__title-delete">Вы уверены?</h3>
-         <form name="deleteForm" action="#" class="popup__form popup__form_type_delete" novalidate>
-            <button type="submit"
-             class="popup__button popup__button-save"
-              onClick={onDeleteCard}  >
-            {isLoading ? 'Удаление' : 'Да'}
-            </button>
-         </form>
-         <button type="button" 
-         class="popup__close popup__close-delete">
-
-         </button>
-      </div>
-    </section>
-
-    )
+      >
+    </PopupWithForm>
+  );
 }
 
 export default DeleteCardPopup;
