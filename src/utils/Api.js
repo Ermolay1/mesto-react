@@ -31,7 +31,7 @@ class Api {
   deleteCard(id) {
     return this._request(`${this._basePath}/cards/${id}`, {
       method: "DELETE",
-      headers: this._getHeaders,
+      headers: this._getHeaders(),
     });
   }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-function DeleteCardPopup({ isOpen, handleDeleteCard, onSubmit, isLoading, onClose, onDeleteCard, card, submitTitle }) {
+
+function DeleteCardPopup({ isOpen, onSubmit, isLoading, onClose, onDeleteCard, card, submitTitle }) {
 
    const popupClass = `popup popup_type_delete-card ${
     isOpen ? "popup_opened" : ""

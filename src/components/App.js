@@ -23,7 +23,7 @@ function App() {
     about: "",
     avatar: "",
   });
-  const [removedCardId, setRemovedCardId] = useState("");
+  const [removedCardId, setRemovedCardId] = useState(' ');
 
   useEffect(() => {
     api
@@ -75,10 +75,12 @@ function App() {
     api
       .deleteCard(cardId)
       .then(() => {
-        setCards(cards => cards.filter(c => c._id !== cardId));
-        closeAllPopups();
+        setCards(cards => cards.filter(card => card._id !== cardId));
+        
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
       .finally(() => {
         setIsLoadingDeleteCard(false);
       });
