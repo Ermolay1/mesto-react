@@ -22,7 +22,7 @@ function Card({ card, onCardClick, deleteCardClick, onCardLike }) {
   }
 
   function handleDeleteClick() {
-    deleteCardClick(card);
+    deleteCardClick(card._id);
   }
   return (
     <li className="element">

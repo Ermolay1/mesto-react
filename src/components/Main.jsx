@@ -17,14 +17,13 @@ function Main({
   const currentUser = useContext(CurrentUserContext);
 
   const cardsElements = cards.map((card) => (
-    <li key={card._id}>
-      <Card
-        card={card}
-        onCardClick={onCardClick}
-        deleteCardClick={onCardDelete}
-        onCardLike={onCardLike}
-      />
-    </li>
+    <Card
+      key={card._id}
+      card={card}
+      onCardClick={onCardClick}
+      deleteCardClick={onCardDelete}
+      onCardLike={onCardLike}
+    />
   ));
 
   return (

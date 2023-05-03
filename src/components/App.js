@@ -24,7 +24,7 @@ function App() {
     avatar: "",
   });
   const [removedCardId, setRemovedCardId] = useState(' ');
-
+  
   useEffect(() => {
     api
       .getAllCardWhithUser()
@@ -47,9 +47,9 @@ function App() {
     setIsNewCardPopupOpen(true);
   }
 
-  function handleCardClick(card) {
+  function handleCardClick(cardId) {
     setIsImagePopupOpen(true);
-    setSelectedCard(card);
+    setSelectedCard(cardId);
   }
 
   function handleDeleteCardClick(cardId) {
@@ -76,13 +76,13 @@ function App() {
       .deleteCard(cardId)
       .then(() => {
         setCards(cards => cards.filter(card => card._id !== cardId));
-        
+        closeAllPopups()
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        setIsLoadingDeleteCard(false);
+        setIsLoadingDeleteCard(false)
       });
   }
 
@@ -118,7 +118,7 @@ function App() {
       .editUserInfo({ item: user })
       .then((newUser) => {
         setCurrentUser(newUser);
-        closeAllPopups();
+       
       })
       .catch((err) => {
         console.log(err);
@@ -126,6 +126,7 @@ function App() {
       .finally(() => {
         setIsLoadingUpdateUser(false);
       });
+      closeAllPopups();
   }
 
   function handleUpdateAvatar(userAvatarLink) {
