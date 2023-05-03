@@ -69,7 +69,6 @@ function EditProfilePopup({ isOpen, isLoading, onUpdateUser, onClose }) {
       title="Редактировать профиль"
       buttonText={isLoading ? "Сохранение" : "Сохранить"}
       isOpen={isOpen}
-      
       onClose={onClose}
       isFormValid={formValid}
     >
